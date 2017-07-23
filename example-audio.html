@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JavaScript Audio Example</title>
+<script>
+
+window.onload = function() {
+	var AudioContext = window.AudioContext || window.webkitAudioContext;
+	var audioCtx = new AudioContext();
+
+	// create Oscillator and gain node
+	var oscillator = audioCtx.createOscillator();
+	var gainNode = audioCtx.createGain();
+
+	// connect oscillator to gain node to speakers
+
+	oscillator.connect(gainNode);
+	gainNode.connect(audioCtx.destination);
+
+	var initialFreq = 256;
+	var initialVol = 0.01;
+
+	// set options for the oscillator
+
+
+	oscillator.detune.value = 100; // value in cents
+	oscillator.start(0);
+
+	oscillator.onended = function() {
+		console.log('Your tone has now stopped playing!');
+	}
+
+	gainNode.gain.value = initialVol;
+
+}
+</script>
+</head>
+<body>
+	<table>
+	<thead></thead>
+	<tbody>
+		<tr>
+			<td>
+				
+			</td>
+		</tr>
+	</tbody>
+	</table>
+</body>
+</html>
