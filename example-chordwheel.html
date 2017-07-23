@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JavaScript Svg Example</title>
+<style>
+.wheel {
+	fill: none;
+	stroke: black;
+	stroke-width: 2px;
+}
+.node {
+	fill: white;
+	stroke: black;
+	stroke-width: 2px;
+}
+.nodetext {
+	font-family: sans;
+	text-anchor: middle;
+}
+#canvas {
+	width: 1000px;
+	height: 600px;
+}
+</style>
+<script>
+
+// c d ef g a b
+// 1   2 .3        c major
+//     1  2 ..3    e minor
+//  .3    1   2    g major
+//   2 ..3    1    b minor
+//   1   2 .3      d major
+// .3    1  2 .    f# minor
+//  2 .3    1      a major
+//  1  2 ..3       c# minor
+//     1   2 .3    e major
+//  ..3    1  2    g# minor
+//    2 .3    1    b major
+//    1  2 ..3     d# minor
+// .3    1   2     f# major
+//  2  .3    1     a# minor
+//  1   2 ..3      c# major
+
+// c d ef g a b
+// .3   1   2 .    f minor
+//  2 .3    1      a major
+
+
+var notes = ['c','c#','d','d#','e','f','f#','g','g#','a','a#','b']
+
+function mod(a,b) {
+	if (a >= 0) {
+		return a % b;
+	}
+	else {
+		return (b - ((-a) % b)) % b;
+	}
+}
+
+function note_label(i) {
+	return '' + notes[mod(i,12)];
+}
+
+function chord_label(i) {
+	if (i % 2 === 0)
+	{
+		// major
+		var j = (i/2) * 7;
+		return note_label(j) + note_label(j+4) + note_label(j+7)
+	}
+	else
+	{
+		// minor
+		var j = 4 + ((i-1)/2) * 7;
+		return note_label(j) + note_label(j+3) + note_label(j+7);
+	}
+}
+
+window.onload = function() {
+	var svg = document.getElementById('canvas');
+	var wheel = document.createElementNS('http://www.w3.org/2000/svg','circle');
+	wheel.setAttribute('cx', 500);
+	wheel.setAttribute('cy', 500);
+	wheel.setAttribute('r', 400);
+	wheel.setAttribute('class', 'wheel');
+	svg.append(wheel);
+
+	for (var i = 0; i < 24; i++)
+	{
+		var node = document.createElementNS('http://www.w3.org/2000/svg','circle');
+		var theta = 6.283 * i / 24
+		node.setAttribute('cx', 500 + 400 * Math.sin(theta));
+		node.setAttribute('cy', 500 - 400 * Math.cos(theta));
+		node.setAttribute('r', 40);
+		node.setAttribute('class', 'node');
+		svg.append(node);
+
+		var text = document.createElementNS('http://www.w3.org/2000/svg','text');
+		text.textContent = chord_label(i);
+		text.setAttribute('x', 500 + 400 * Math.sin(theta));
+		text.setAttribute('y', 500 - 400 * Math.cos(theta));
+		text.setAttribute('width', 100);
+		text.setAttribute('height', 100);
+		text.setAttribute('class', 'nodetext');
+		svg.append(text);
+	}
+};
+</script>
+</head>
+<body>
+<svg id="canvas"></svg>
+</body>
+</html>
