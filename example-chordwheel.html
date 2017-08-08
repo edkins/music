@@ -9,10 +9,15 @@
 	stroke: black;
 	stroke-width: 2px;
 }
-.node {
+.major_chord {
 	fill: white;
 	stroke: black;
-	stroke-width: 2px;
+	stroke-width: 3px;
+}
+.minor_chord {
+	fill: #ddd;
+	stroke: black;
+	stroke-width: 3px;
 }
 .nodetext {
 	font-family: sans;
@@ -21,6 +26,7 @@
 #canvas {
 	width: 1000px;
 	height: 600px;
+	background: #ccd;
 }
 </style>
 <script>
@@ -82,7 +88,7 @@ window.onload = function() {
 	var wheel = document.createElementNS('http://www.w3.org/2000/svg','circle');
 	wheel.setAttribute('cx', 500);
 	wheel.setAttribute('cy', 500);
-	wheel.setAttribute('r', 390);
+	wheel.setAttribute('r', 400);
 	wheel.setAttribute('class', 'wheel');
 	svg.append(wheel);
 
@@ -90,11 +96,11 @@ window.onload = function() {
 	{
 		var node = document.createElementNS('http://www.w3.org/2000/svg','circle');
 		var theta = 6.283 * i / 24
-		var r = 400 - (i % 2) * 15;
+		var r = 400;
 		node.setAttribute('cx', 500 + r * Math.sin(theta));
 		node.setAttribute('cy', 500 - r * Math.cos(theta));
 		node.setAttribute('r', 40);
-		node.setAttribute('class', 'node');
+		node.setAttribute('class', (i%2) ? 'minor_chord': 'major_chord');
 		svg.append(node);
 
 		var text = document.createElementNS('http://www.w3.org/2000/svg','text');
