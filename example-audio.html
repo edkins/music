@@ -22,14 +22,8 @@ window.onload = function() {
 	var initialVol = 0.01;
 
 	// set options for the oscillator
-
-
 	oscillator.detune.value = 100; // value in cents
 	oscillator.start(0);
-
-	oscillator.onended = function() {
-		console.log('Your tone has now stopped playing!');
-	}
 
 	gainNode.gain.value = initialVol;
 
@@ -37,15 +31,5 @@ window.onload = function() {
 </script>
 </head>
 <body>
-	<table>
-	<thead></thead>
-	<tbody>
-		<tr>
-			<td>
-				
-			</td>
-		</tr>
-	</tbody>
-	</table>
 </body>
 </html>

@@ -82,7 +82,7 @@ window.onload = function() {
 	var wheel = document.createElementNS('http://www.w3.org/2000/svg','circle');
 	wheel.setAttribute('cx', 500);
 	wheel.setAttribute('cy', 500);
-	wheel.setAttribute('r', 400);
+	wheel.setAttribute('r', 390);
 	wheel.setAttribute('class', 'wheel');
 	svg.append(wheel);
 
@@ -90,16 +90,17 @@ window.onload = function() {
 	{
 		var node = document.createElementNS('http://www.w3.org/2000/svg','circle');
 		var theta = 6.283 * i / 24
-		node.setAttribute('cx', 500 + 400 * Math.sin(theta));
-		node.setAttribute('cy', 500 - 400 * Math.cos(theta));
+		var r = 400 - (i % 2) * 15;
+		node.setAttribute('cx', 500 + r * Math.sin(theta));
+		node.setAttribute('cy', 500 - r * Math.cos(theta));
 		node.setAttribute('r', 40);
 		node.setAttribute('class', 'node');
 		svg.append(node);
 
 		var text = document.createElementNS('http://www.w3.org/2000/svg','text');
 		text.textContent = chord_label(i);
-		text.setAttribute('x', 500 + 400 * Math.sin(theta));
-		text.setAttribute('y', 500 - 400 * Math.cos(theta));
+		text.setAttribute('x', 500 + r * Math.sin(theta));
+		text.setAttribute('y', 500 - r * Math.cos(theta));
 		text.setAttribute('width', 100);
 		text.setAttribute('height', 100);
 		text.setAttribute('class', 'nodetext');
