@@ -1,0 +1,25 @@
+.wheel {
+	fill: none;
+	stroke: black;
+	stroke-width: 2px;
+}
+.major_chord {
+	fill: white;
+	stroke: black;
+	stroke-width: 3px;
+}
+.minor_chord {
+	fill: #ddd;
+	stroke: black;
+	stroke-width: 3px;
+}
+.nodetext {
+	font-family: sans;
+	text-anchor: middle;
+}
+#canvas {
+	width: 1000px;
+	height: 600px;
+	background: #ccd;
+}
+
