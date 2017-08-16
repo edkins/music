@@ -59,7 +59,7 @@ window.onload = function() {
 		var text = document.createElementNS('http://www.w3.org/2000/svg','text');
 		text.textContent = chord_label(i);
 		text.setAttribute('x', 500 + r * Math.sin(theta));
-		text.setAttribute('y', 500 - r * Math.cos(theta));
+		text.setAttribute('y', 500 - r * Math.cos(theta) + 5);
 		text.setAttribute('width', 100);
 		text.setAttribute('height', 100);
 		text.setAttribute('class', 'nodetext');
