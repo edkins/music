@@ -16,6 +16,7 @@
 .nodetext {
 	font-family: sans;
 	text-anchor: middle;
+	pointer-events: none;
 }
 #canvas {
 	width: 1000px;

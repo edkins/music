@@ -1,3 +1,5 @@
+'use strict';
+
 var notes = ['c','c#','d','d#','e','f','f#','g','g#','a','a#','b']
 
 function mod(a,b) {
@@ -11,6 +13,10 @@ function mod(a,b) {
 
 function note_label(i) {
 	return '' + notes[mod(i,12)];
+}
+
+function handle_node_click(event) {
+	console.log('clicked a node ' + event.target.dataset.index);
 }
 
 function chord_label(i) {
@@ -46,6 +52,8 @@ window.onload = function() {
 		node.setAttribute('cy', 500 - r * Math.cos(theta));
 		node.setAttribute('r', 40);
 		node.setAttribute('class', (i%2) ? 'minor_chord': 'major_chord');
+		node.onclick = handle_node_click;
+		node.dataset.index = i;
 		svg.append(node);
 
 		var text = document.createElementNS('http://www.w3.org/2000/svg','text');
